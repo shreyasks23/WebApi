@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -49,56 +49,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PatientDataModel.Context.cs">
+    <Compile Include="PatientDetailModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PatientDataModel.Context.tt</DependentUpon>
+      <DependentUpon>PatientDetailModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="PatientDataModel.cs">
+    <Compile Include="PatientDetailModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PatientDataModel.tt</DependentUpon>
+      <DependentUpon>PatientDetailModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PatientDataModel.Designer.cs">
+    <Compile Include="PatientDetailModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PatientDataModel.edmx</DependentUpon>
+      <DependentUpon>PatientDetailModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="tblPatient.cs">
-      <DependentUpon>PatientDataModel.tt</DependentUpon>
+    <Compile Include="Tbl_Patient_Details.cs">
+      <DependentUpon>PatientDetailModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblUser.cs">
-      <DependentUpon>PatientDataModel.tt</DependentUpon>
+    <Compile Include="Tbl_Users.cs">
+      <DependentUpon>PatientDetailModel.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="PatientDataModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PatientDataModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-    <None Include="PatientDataModel.edmx.diagram">
-      <DependentUpon>PatientDataModel.edmx</DependentUpon>
+    <EntityDeploy Include="PatientDetailModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PatientDetailModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PatientDetailModel.edmx.diagram">
+      <DependentUpon>PatientDetailModel.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PatientDataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PatientDataModel.Context.cs</LastGenOutput>
-      <DependentUpon>PatientDataModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="PatientDataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PatientDataModel.edmx</DependentUpon>
-      <LastGenOutput>PatientDataModel.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="PatientDetailModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PatientDetailModel.edmx</DependentUpon>
+      <LastGenOutput>PatientDetailModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="PatientDetailModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PatientDetailModel.edmx</DependentUpon>
+      <LastGenOutput>PatientDetailModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
