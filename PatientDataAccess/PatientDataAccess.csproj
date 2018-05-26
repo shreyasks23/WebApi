@@ -77,7 +77,6 @@
     <None Include="packages.config" />
     <EntityDeploy Include="PatientDetailModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PatientDetailModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="PatientDetailModel.edmx.diagram">
       <DependentUpon>PatientDetailModel.edmx</DependentUpon>

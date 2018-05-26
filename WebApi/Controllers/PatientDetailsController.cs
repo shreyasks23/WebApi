@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -35,7 +36,8 @@ namespace WebApi.Controllers
         //@Path: api/patientdetails/{id}
         public HttpResponseMessage Get(int id)
         {
-            try {
+            try
+            {
                 using (PatientDBContext patientDBContext = new PatientDBContext())
                 {
                     var entities = patientDBContext.Tbl_Patients.FirstOrDefault(e => e.Patient_ID == id);
@@ -73,7 +75,7 @@ namespace WebApi.Controllers
                     return message;
                 }
             }
-            catch(Exception e)
+            catch(DbEntityValidationException e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e);
             }
@@ -81,16 +83,16 @@ namespace WebApi.Controllers
 
         //update existing patient details
         //@Path: api/patientdetails/{id}
-        public HttpResponseMessage Put(Tbl_Patients patient_Details)
+        public HttpResponseMessage Put(int id,[FromBody]Tbl_Patients patient_Details)
         {
             try
             {
                 using (PatientDBContext patientDBContext = new PatientDBContext())
                 {
-                   var entity = patientDBContext.Tbl_Patients.FirstOrDefault(e => e.Patient_ID == patient_Details.Patient_ID);
-
-                    if(patient_Details != null)
-                    {
+                    if (patient_Details != null)
+                    { 
+                        var entity = patientDBContext.Tbl_Patients.FirstOrDefault(e => e.Patient_ID == id);                  
+                    
                         entity.Age = patient_Details.Age;
                         entity.BloodPressure = patient_Details.BloodPressure;
                         entity.BMI = patient_Details.BMI;
@@ -116,6 +118,8 @@ namespace WebApi.Controllers
                         entity.Waist = patient_Details.Waist;
                         entity.WaistHeightRatio = patient_Details.WaistHeightRatio;
                         entity.WaistHipRatio = patient_Details.WaistHipRatio;
+
+                        patientDBContext.SaveChanges();
 
                         return Request.CreateResponse(HttpStatusCode.OK, entity);
                     }
