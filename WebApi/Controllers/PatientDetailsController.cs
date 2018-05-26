@@ -129,7 +129,7 @@ namespace WebApi.Controllers
                     }
                 }
             }
-            catch(Exception ex)
+            catch(DbEntityValidationException ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest,ex);
             }
@@ -159,7 +159,7 @@ namespace WebApi.Controllers
                 }
 
             }
-            catch(Exception ex)
+            catch(DbEntityValidationException ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
