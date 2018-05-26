@@ -25,7 +25,7 @@ namespace PatientDataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Tbl_Patient_Details> Tbl_Patient_Details { get; set; }
+        public virtual DbSet<Tbl_Patients> Tbl_Patients { get; set; }
         public virtual DbSet<Tbl_Users> Tbl_Users { get; set; }
     }
 }

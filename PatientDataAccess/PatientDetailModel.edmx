@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TestDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PatientDetailModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Tbl_Patient_Details">
           <Key>
             <PropertyRef Name="Patient_ID" />
@@ -38,7 +38,7 @@
           <Key>
             <PropertyRef Name="Patient_ID" />
           </Key>
-          <Property Name="Patient_ID" Type="int" StoreGeneratedPattern="None" Nullable="false" />
+          <Property Name="Patient_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Patient_Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Patient_Location" Type="nvarchar" MaxLength="50" />
           <Property Name="Gender" Type="char" MaxLength="6" />
@@ -67,7 +67,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TestDBModelStoreContainer">
+        <EntityContainer Name="PatientDetailModelStoreContainer">
           <EntitySet Name="Tbl_Patient_Details" EntityType="Self.Tbl_Patient_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Patients" EntityType="Self.Tbl_Patients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Users" EntityType="Self.Tbl_Users" Schema="dbo" store:Type="Tables" />
@@ -80,12 +80,17 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TestDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Tbl_Patient_Details">
+      <Schema Namespace="PatientDetailModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tbl_Patients">
           <Key>
             <PropertyRef Name="Patient_ID" />
           </Key>
-          <Property Name="Patient_ID" Type="Int32" Nullable="false" />
+          <Property Name="Patient_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Patient_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="ExaminedOn" Type="DateTime" Precision="0" />
           <Property Name="Temperature" Type="Double" />
           <Property Name="Height" Type="Double" />
           <Property Name="Weight" Type="Double" />
@@ -109,11 +114,6 @@
           <Property Name="VaccinationTyphoid" Type="Boolean" />
           <Property Name="EyeTest" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="SkinTest" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Patient_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Patient_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
-          <Property Name="Age" Type="Int32" />
-          <Property Name="ExaminedOn" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Tbl_Users">
           <Key>
@@ -126,7 +126,7 @@
           <Property Name="RegisteredOn" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityContainer Name="PatientDBContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Tbl_Patient_Details" EntityType="Self.Tbl_Patient_Details" />
+          <EntitySet Name="Tbl_Patients" EntityType="Self.Tbl_Patients" />
           <EntitySet Name="Tbl_Users" EntityType="Self.Tbl_Users" />
         </EntityContainer>
       </Schema>
@@ -134,47 +134,47 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TestDBModelStoreContainer" CdmEntityContainer="PatientDBContext">
-          <EntitySetMapping Name="Tbl_Patient_Details">
-            <EntityTypeMapping TypeName="TestDBModel.Tbl_Patient_Details">
-              <MappingFragment StoreEntitySet="Tbl_Patient_Details">
-                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
-                <ScalarProperty Name="Temperature" ColumnName="Temperature" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="BMI" ColumnName="BMI" />
-                <ScalarProperty Name="IdealBodyWeight" ColumnName="IdealBodyWeight" />
-                <ScalarProperty Name="BodyFat" ColumnName="BodyFat" />
-                <ScalarProperty Name="BoneMass" ColumnName="BoneMass" />
-                <ScalarProperty Name="MuscleMass" ColumnName="MuscleMass" />
-                <ScalarProperty Name="BodyWater" ColumnName="BodyWater" />
-                <ScalarProperty Name="Waist" ColumnName="Waist" />
-                <ScalarProperty Name="Hip" ColumnName="Hip" />
-                <ScalarProperty Name="WaistHipRatio" ColumnName="WaistHipRatio" />
-                <ScalarProperty Name="WaistHeightRatio" ColumnName="WaistHeightRatio" />
-                <ScalarProperty Name="BloodPressure" ColumnName="BloodPressure" />
-                <ScalarProperty Name="Pulse" ColumnName="Pulse" />
-                <ScalarProperty Name="SPO2" ColumnName="SPO2" />
-                <ScalarProperty Name="ECG" ColumnName="ECG" />
-                <ScalarProperty Name="HaemoglobinCount" ColumnName="HaemoglobinCount" />
-                <ScalarProperty Name="SputumTest" ColumnName="SputumTest" />
-                <ScalarProperty Name="VaccinationHB" ColumnName="VaccinationHB" />
-                <ScalarProperty Name="VaccinationTyphoid" ColumnName="VaccinationTyphoid" />
-                <ScalarProperty Name="EyeTest" ColumnName="EyeTest" />
-                <ScalarProperty Name="SkinTest" ColumnName="SkinTest" />
-              </MappingFragment>
+        <EntityContainerMapping StorageEntityContainer="PatientDetailModelStoreContainer" CdmEntityContainer="PatientDBContext">
+          <EntitySetMapping Name="Tbl_Patients">
+            <EntityTypeMapping TypeName="PatientDetailModel.Tbl_Patients">
               <MappingFragment StoreEntitySet="Tbl_Patients">
-                <ScalarProperty Name="ExaminedOn" ColumnName="ExaminedOn" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Patient_Location" ColumnName="Patient_Location" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
                 <ScalarProperty Name="Patient_Name" ColumnName="Patient_Name" />
+                <ScalarProperty Name="Patient_Location" ColumnName="Patient_Location" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ExaminedOn" ColumnName="ExaminedOn" />
+              </MappingFragment>
+              <MappingFragment StoreEntitySet="Tbl_Patient_Details">
+                <ScalarProperty Name="SkinTest" ColumnName="SkinTest" />
+                <ScalarProperty Name="EyeTest" ColumnName="EyeTest" />
+                <ScalarProperty Name="VaccinationTyphoid" ColumnName="VaccinationTyphoid" />
+                <ScalarProperty Name="VaccinationHB" ColumnName="VaccinationHB" />
+                <ScalarProperty Name="SputumTest" ColumnName="SputumTest" />
+                <ScalarProperty Name="HaemoglobinCount" ColumnName="HaemoglobinCount" />
+                <ScalarProperty Name="ECG" ColumnName="ECG" />
+                <ScalarProperty Name="SPO2" ColumnName="SPO2" />
+                <ScalarProperty Name="Pulse" ColumnName="Pulse" />
+                <ScalarProperty Name="BloodPressure" ColumnName="BloodPressure" />
+                <ScalarProperty Name="WaistHeightRatio" ColumnName="WaistHeightRatio" />
+                <ScalarProperty Name="WaistHipRatio" ColumnName="WaistHipRatio" />
+                <ScalarProperty Name="Hip" ColumnName="Hip" />
+                <ScalarProperty Name="Waist" ColumnName="Waist" />
+                <ScalarProperty Name="BodyWater" ColumnName="BodyWater" />
+                <ScalarProperty Name="MuscleMass" ColumnName="MuscleMass" />
+                <ScalarProperty Name="BoneMass" ColumnName="BoneMass" />
+                <ScalarProperty Name="BodyFat" ColumnName="BodyFat" />
+                <ScalarProperty Name="IdealBodyWeight" ColumnName="IdealBodyWeight" />
+                <ScalarProperty Name="BMI" ColumnName="BMI" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Temperature" ColumnName="Temperature" />
                 <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tbl_Users">
-            <EntityTypeMapping TypeName="TestDBModel.Tbl_Users">
+            <EntityTypeMapping TypeName="PatientDetailModel.Tbl_Users">
               <MappingFragment StoreEntitySet="Tbl_Users">
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
                 <ScalarProperty Name="User_Name" ColumnName="User_Name" />

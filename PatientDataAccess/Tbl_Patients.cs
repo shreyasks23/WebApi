@@ -12,9 +12,14 @@ namespace PatientDataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Patient_Details
+    public partial class Tbl_Patients
     {
         public int Patient_ID { get; set; }
+        public string Patient_Name { get; set; }
+        public string Patient_Location { get; set; }
+        public string Gender { get; set; }
+        public Nullable<int> Age { get; set; }
+        public Nullable<System.DateTime> ExaminedOn { get; set; }
         public Nullable<double> Temperature { get; set; }
         public Nullable<double> Height { get; set; }
         public Nullable<double> Weight { get; set; }
@@ -38,10 +43,5 @@ namespace PatientDataAccess
         public Nullable<bool> VaccinationTyphoid { get; set; }
         public string EyeTest { get; set; }
         public string SkinTest { get; set; }
-        public string Patient_Name { get; set; }
-        public string Patient_Location { get; set; }
-        public string Gender { get; set; }
-        public Nullable<int> Age { get; set; }
-        public Nullable<System.DateTime> ExaminedOn { get; set; }
     }
 }

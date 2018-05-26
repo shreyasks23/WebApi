@@ -65,7 +65,7 @@
       <DependentUpon>PatientDetailModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tbl_Patient_Details.cs">
+    <Compile Include="Tbl_Patients.cs">
       <DependentUpon>PatientDetailModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Tbl_Users.cs">
