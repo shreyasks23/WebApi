@@ -14,27 +14,26 @@ namespace WebApi.Controllers
 
         //Get all patient details 
         //@Path: api/patientdetails/
-        public IEnumerable<Tbl_Patients> Get()
+        public HttpResponseMessage GetPatientDetails()
         {
             try
             {
                 using ( PatientDBContext patientDBContext = new PatientDBContext())
                 {
-                    return patientDBContext.Tbl_Patients.ToList();
+                    var entities = patientDBContext.Tbl_Patients.ToList();
+                    return Request.CreateResponse(HttpStatusCode.OK, entities);
                 }
             }
             catch(Exception e)
             {
-               Console.Write("error", e);
-
-                return null;
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e);
             }
         }
 
 
         //Get particular patient details using Patient_ID 
         //@Path: api/patientdetails/{id}
-        public HttpResponseMessage Get(int id)
+        public HttpResponseMessage GetPatientDetail(int id)
         {
             try
             {
@@ -48,7 +47,7 @@ namespace WebApi.Controllers
                     }
                     else
                     {
-                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Patient with ID: " + id + "is not found");
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Patient with ID: " + id + " is not found");
                     }
                 }
             }
